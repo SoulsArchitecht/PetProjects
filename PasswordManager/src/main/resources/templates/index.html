@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Password Manager</title>
+</head>
+<body>
+    <div align="center">
+<!--        <img src="resources/img/fox.jpg">-->
+        <h1>URLInfo Manager</h1>
+
+        <form th:action= "@{/search}" method="get" > // вместо action="search"
+            <input type="text" name="keyword" placeholder="keyword" />
+            <input type="submit" value="Search" />
+        </form>
+
+        <br><br>
+
+        <a href="new"> <h2>Create New URLInfo</h2></a>
+        <br><br>
+        <table border="2" cellpadding="12">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>URL_Link</th>
+                <th>Email</th>
+                <th>Nickname</th>
+                <th>Password</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="urlinformation : ${infoList}">
+                    <td th:text="${urlinformation.id}">ID</td>
+                    <td th:text="${urlinformation.URL}">URL</td>
+                    <td th:text="${urlinformation.email}">Email</td>
+                    <td th:text="${urlinformation.nickname}">Nickname</td>
+                    <td th:text="${urlinformation.password}">Password</td>
+                    <td>
+                        <a th:href="@{'/edit/' + ${urlinformation.id}}">Edit</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a th:href="@{'/delete/' + ${urlinformation.id}}">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+
+
+</body>
+</html>

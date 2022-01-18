@@ -1,0 +1,62 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Search Result</title>
+</head>
+<body>
+<!--
+    <div align="center">
+        <br>
+        <div class="col-sm-4">
+            <form action="#" th:action="@{/search}" th:object="${urlInformation}" method="post">
+                <div align ="left">
+
+                    <tr>
+                        <label class="form-label"> URLName </label>
+                        <td>
+                            <input type="text" th:field="*{urlInformation.URL}" class="form-control" placeholder="URL Information">
+                        </td>
+                    </tr>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+-->
+
+<div align="center">
+
+    <br> <br>
+    <h2>New search</h2>
+    <br> <br>
+
+    <form th:action= "@{/search}" method="get" >
+        <input type="text" name="keyword" placeholder="keyword" />
+        <input type="submit" value="Search" />
+    </form>
+    <br><br>
+
+    <h2>Search Result</h2>
+    <table border="1" cellpadding="12" bgcolor="#7fffd4">
+        <tr>
+            <th>ID</th>
+            <th>URL</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Nickname</th>
+        </tr>
+        <tr th:each="res : ${result}" >
+
+            <td th:text="${res.id}"></td>
+            <td th:text="${res.URL}"></td>
+            <td th:text="${res.email}"></td>
+            <td th:text="${res.password}"></td>
+            <td th:text="${res.nickname}"></td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>
