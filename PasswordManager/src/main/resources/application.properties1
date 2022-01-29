@@ -1,0 +1,28 @@
+spring.jpa.hibernate.ddl-auto=none
+spring.datasource.url=jdbc:mysql://localhost:3306/my_db
+spring.datasource.username=bestuser
+spring.datasource.password=bestuser
+
+spring.main.banner-mode=off
+logging.level.org.springframework.web=ERROR
+logging.level.com.soulsarch=DEBUG
+#create file app.log in path temp
+#logging.file.name=${java.io.tmpdir}/app.log
+logging.file.name=app.log
+##create file app.log in path logs Tomcat Server
+##logging.file.path=${catalina.home}/logs/app.log
+##create file app.log in pointed by admin path
+##logging.file.path=F:/1/app.log
+#
+##logging.level.root=WARN
+#
+##log pattern for console
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %msg%n
+#
+##log pattern for writing in file
+logging.pattern.file="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+#logging.file.path=/F/1/app.log
+#clean logging history
+logging.logback.rollingpolicy.clean-history-on-start=false
+
+

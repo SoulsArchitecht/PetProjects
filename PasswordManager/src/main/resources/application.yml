@@ -1,0 +1,44 @@
+spring:
+  liquibase:
+    enabled: false
+  datasource:
+    url: jdbc:h2:file:./db;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+    username: u
+    password: 1
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+  h2:
+    console:
+      enabled: true
+
+
+logging:
+  file:
+    name: logs/app_dev.log
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+  level:
+    org:
+      springframework:
+        web: ERROR
+    com:
+      soulsarch:
+        PasswordManagerApplication: DEBUG
+
+
+
+
+#  logging:
+#    file: logs/app.log
+#    pattern:
+#      console: "%d %-5level %logger : %msg%n"
+#      file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+#    level:
+#      root: ERROR
+#      org.springframework.web: ERROR
+#      com.soulsarch.MyApplication: DEBUG
+
+

@@ -6,16 +6,17 @@ import java.util.Objects;
 @Entity
 public class URLInformation {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String URL;
+    @Column(name="url", nullable = false)
+    private String url;
     private String email;
     @Column(name="nickname")
     private String nickname;
     private String password;
 
-    public URLInformation(String URL, String email, String nickName, String password) {
-        this.URL = URL;
+    public URLInformation(String url, String email, String nickName, String password) {
+        this.url = url;
         this.email = email;
         this.nickname = nickname;
         this.password = password;
@@ -33,12 +34,12 @@ public class URLInformation {
         this.id = id;
     }
 
-    public String getURL() {
-        return URL;
+    public String getUrl() {
+        return url;
     }
 
-    public void setURL(String URL) {
-        this.URL = URL;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getEmail() {
@@ -70,18 +71,18 @@ public class URLInformation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         URLInformation that = (URLInformation) o;
-        return id == that.id && URL.equals(that.URL) && email.equals(that.email) && Objects.equals(nickname, that.nickname) && password.equals(that.password);
+        return id == that.id && url.equals(that.url) && email.equals(that.email) && Objects.equals(nickname, that.nickname) && password.equals(that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, URL, email, nickname, password);
+        return Objects.hash(id, url, email, nickname, password);
     }
 
     @Override
     public String toString() {
         return "URLInformation{" +
-                "URL='" + URL + '\'' +
+                "URL='" + url + '\'' +
                 ", email='" + email + '\'' +
                 ", nickName='" + nickname + '\'' +
                 ", password='" + password + '\'' +

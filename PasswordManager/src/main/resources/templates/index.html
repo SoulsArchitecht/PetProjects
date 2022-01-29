@@ -12,7 +12,7 @@
 <!--        <img src="resources/img/fox.jpg">-->
         <h1>URLInfo Manager</h1>
 
-        <form th:action= "@{/search}" method="get" > // вместо action="search"
+        <form th:action= "@{/search}" method="get" > <!-- вместо action="search" -->
             <input type="text" name="keyword" placeholder="keyword" />
             <input type="submit" value="Search" />
         </form>
@@ -36,7 +36,7 @@
             <tbody>
                 <tr th:each="urlinformation : ${infoList}">
                     <td th:text="${urlinformation.id}">ID</td>
-                    <td th:text="${urlinformation.URL}">URL</td>
+                    <td th:text="${urlinformation.url}">URL</td>
                     <td th:text="${urlinformation.email}">Email</td>
                     <td th:text="${urlinformation.nickname}">Nickname</td>
                     <td th:text="${urlinformation.password}">Password</td>
