@@ -8,7 +8,15 @@
     <title>Edit URLInfo</title>
 </head>
 <body>
-    <div align="center">
+    <div align="center" style="background-color: antiquewhite; min-width: 1366px; min-height: 768px; align-content: center;
+     position: relative; margin: 0 auto;">
+        <br> <br>
+        <form action="#" th:action="@{/shutdownContext}"  method="post">
+            <input class="close-btn" type="submit" value="Application Shutdown" style="background-color: lightgreen;
+             width: 150px; height: 30px; border: solid 4px rgba(0, 0, 0, 0.23); cursor: pointer; border-radius: 10px">
+        </form>
+
+        <br><br>
         <h1>Edit URLInfo</h1>
         <br>
         <form action="#" th:action="@{/save}" th:object="${urlInformation}" method="post">
@@ -44,10 +52,15 @@
                     <td><input type="text" th:field="*{description}" /></td>
                 <tr>
                     <br>
-                    <td colspan="2"><button type="submit">Save</button></td>
+                    <td colspan="2" ><button type="submit" class="save-btn" style="cursor: pointer; background-color: lightgreen; border-radius: 3px">Save</button></td>
                 </tr>
 
             </table>
+        </form>
+
+        <br> <br>
+        <form action="#" th:action="@{/}"  method="post" >
+            <input class="cancel-btn" type="submit" value="Cancel" style="cursor: pointer; background-color: lightgreen; border-radius: 3px">
         </form>
     </div>
 </body>

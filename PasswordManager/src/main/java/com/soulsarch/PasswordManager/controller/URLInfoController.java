@@ -2,7 +2,11 @@ package com.soulsarch.PasswordManager.controller;
 
 import com.soulsarch.PasswordManager.entity.URLInformation;
 import com.soulsarch.PasswordManager.service.URLInfoService;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class URLInfoController {
+public class URLInfoController implements ApplicationContextAware {
     @Autowired
     private URLInfoService service;
+
+    private ApplicationContext context;
 
     @RequestMapping("/")
     public String viewHomePage(Model model) {
@@ -63,4 +69,14 @@ public class URLInfoController {
         return modelAndView;
     }
 
+    @PostMapping("/shutdownContext")
+    public String shutdownContext() {
+        ((ConfigurableApplicationContext) context).close();
+        return "redirect:about:blank";
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext ctx) throws BeansException {
+        this.context = ctx;
+    }
 }

@@ -8,22 +8,30 @@
     <title>Password Manager</title>
 </head>
 <body>
-    <div align="center">
-<!--        <img src="resources/img/fox.jpg">-->
+    <div align="center" style="background-color: antiquewhite; min-width: 1366px; min-height: 768px;
+     align-content: center; position: relative; margin: 0 auto;">
+
+        <br> <br>
+        <form action="#" th:action="@{/shutdownContext}"  method="post">
+            <input class="close-btn" type="submit" value="Application Shutdown" style="background-color: lightgreen;
+             width: 150px; height: 30px; border: solid 4px rgba(0, 0, 0, 0.23); cursor: pointer; border-radius: 10px">
+        </form>
+        <br>
+
         <h1>URLInfo Manager</h1>
 
         <form th:action= "@{/search}" method="get" > <!-- вместо action="search" -->
             <input type="text" name="keyword" placeholder="keyword" />
-            <input type="submit" value="Search" />
+            <input type="submit" value="Search" style="cursor: pointer; background-color: lightgreen; border-radius: 3px"/>
         </form>
 
         <br><br>
 
         <a href="new"> <h2>Create New URLInfo</h2></a>
         <br><br>
-        <table border="2" cellpadding="12">
+        <table border="2" cellpadding="12" bgcolor="#add8e6">
             <thead>
-            <tr>
+            <tr bgcolor="#deb887">
                 <th>ID</th>
                 <th>URL_Link</th>
                 <th>Email</th>
@@ -34,7 +42,7 @@
             </tr>
             </thead>
 
-            <tbody>
+            <tbody style="padding-bottom: 50px">
                 <tr th:each="urlinformation : ${infoList}">
                     <td th:text="${urlinformation.id}">ID</td>
                     <td th:text="${urlinformation.url}">URL</td>
@@ -52,6 +60,7 @@
 
 
         </table>
+        <br><br>
     </div>
 
 

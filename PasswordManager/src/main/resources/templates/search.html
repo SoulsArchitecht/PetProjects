@@ -5,28 +5,16 @@
     <title>Search Result</title>
 </head>
 <body>
-<!--
-    <div align="center">
-        <br>
-        <div class="col-sm-4">
-            <form action="#" th:action="@{/search}" th:object="${urlInformation}" method="post">
-                <div align ="left">
 
-                    <tr>
-                        <label class="form-label"> URLName </label>
-                        <td>
-                            <input type="text" th:field="*{urlInformation.URL}" class="form-control" placeholder="URL Information">
-                        </td>
-                    </tr>
 
-                </div>
-            </form>
-        </div>
+<div align="center" style="background-color: antiquewhite; min-width: 1366px; min-height: 768px; align-content: center;
+ position: relative; margin: 0 auto;">
 
-    </div>
--->
-
-<div align="center">
+    <br> <br>
+    <form action="#" th:action="@{/shutdownContext}"  method="post">
+        <input class="close-btn" type="submit" value="Application Shutdown" style="background-color: lightgreen;
+             width: 150px; height: 30px; border: solid 4px rgba(0, 0, 0, 0.23); cursor: pointer; border-radius: 10px">
+    </form>
 
     <br> <br>
     <h2>New search</h2>
@@ -34,13 +22,13 @@
 
     <form th:action= "@{/search}" method="get" >
         <input type="text" name="keyword" placeholder="keyword" />
-        <input type="submit" value="Search" />
+        <input type="submit" class="search-btn" value="Search" style="cursor: pointer; background-color: lightgreen; border-radius: 3px" />
     </form>
     <br><br>
 
     <h2>Search Result</h2>
-    <table border="1" cellpadding="12" bgcolor="#7fffd4">
-        <tr>
+    <table border="1" cellpadding="12" bgcolor="#add8e6">
+        <tr bgcolor="#deb887">
             <th>ID</th>
             <th>URL</th>
             <th>Email</th>
@@ -64,6 +52,11 @@
             </td>
         </tr>
     </table>
+
+    <br> <br>
+    <form action="#" th:action="@{/}"  method="post" style="padding-bottom: 50px;">
+        <input class="cancel-btn" type="submit" value="Cancel" style="cursor: pointer; background-color: lightgreen; border-radius: 3px"/>
+    </form>
 
 </div>
 </body>
