@@ -46,6 +46,8 @@
             <th>Email</th>
             <th>Password</th>
             <th>Nickname</th>
+            <th>Description</th>
+            <th>Actions</th>
         </tr>
         <tr th:each="res : ${result}" >
 
@@ -54,6 +56,12 @@
             <td th:text="${res.email}"></td>
             <td th:text="${res.password}"></td>
             <td th:text="${res.nickname}"></td>
+            <td th:text="${res.description}"></td>
+            <td>
+                <a th:href="@{'/edit/' + ${res.id}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a th:href="@{'/delete/' + ${res.id}}">Delete</a>
+            </td>
         </tr>
     </table>
 

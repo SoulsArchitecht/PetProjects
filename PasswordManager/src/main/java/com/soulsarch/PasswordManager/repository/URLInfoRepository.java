@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 public interface URLInfoRepository extends JpaRepository<URLInformation, Integer> {
-    //String keyword = null;
+
    String query1 = "SELECT * FROM urlinformation  WHERE "
             + "url LIKE %:keyword%"
             + " OR email LIKE %:keyword%"
-            + " OR password LIKE %:keyword%";
+            + " OR password LIKE %:keyword%"
+            + " OR description LIKE %:keyword%";
 
     String query33 = "SELECT * FROM urlinformation WHERE url LIKE %:keyword%";
     String query34 = "SELECT * FROM urlinformation WHERE url LIKE %?1%";
