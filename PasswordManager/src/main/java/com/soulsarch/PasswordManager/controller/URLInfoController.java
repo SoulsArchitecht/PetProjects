@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +62,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping("/search")
+    @PreAuthorize("hasAuthority('user:write')")
     public ModelAndView search (@RequestParam String keyword) {
         List<URLInformation> result = service.search(keyword);
         ModelAndView modelAndView = new ModelAndView("search");
@@ -70,6 +72,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @PostMapping("/shutdownContext")
+    @PreAuthorize("hasAuthority('user:moderate')")
     public String shutdownContext() {
         ((ConfigurableApplicationContext) context).close();
         return "redirect:about:blank";
