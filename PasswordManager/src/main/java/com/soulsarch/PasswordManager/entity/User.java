@@ -35,7 +35,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    private Role getRole() {
+    public Role getRole() {
         return moderatorTrue == 1 ? Role.MODERATOR : Role.USER;
     }
 }
