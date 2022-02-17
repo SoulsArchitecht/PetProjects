@@ -1,11 +1,13 @@
 package com.soulsarch.PasswordManager.config;
 
+import com.soulsarch.PasswordManager.model.Permission;
 import com.soulsarch.PasswordManager.model.Role;
 import com.soulsarch.PasswordManager.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -20,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -38,17 +41,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable() /*временное отключение защиты*/
             .authorizeRequests()
-            .antMatchers("/**").permitAll()
+            .antMatchers("/auth/login").permitAll()
+            //.antMatchers(HttpMethod.GET, "/**").hasAuthority(Permission.MODERATE.getPermission())
             .anyRequest()
             .authenticated()
             .and()
-            .formLogin().loginPage("/")
+            .formLogin()//.loginPage("/login")
+            .loginPage("/auth/login").permitAll()
+            .defaultSuccessUrl("/auth/success")
             .and()
-            .logout().logoutSuccessUrl("/")
-            .and()
-            //.formLogin().permitAll()
-            //.and()
-            .httpBasic();
+            .logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
+            .invalidateHttpSession(true)
+            .clearAuthentication(true)
+            .deleteCookies("JSESSIONID")
+            .logoutSuccessUrl("/auth/login");
+            //.httpBasic();
 
     }
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+    <title>Please sign in</title>
+<!--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
+<!--    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>-->
+<!--</head>-->
+<body>
+<div class="container"  align="center" style="background-color: antiquewhite; min-width: 1366px; min-height: 768px;
+     align-content: center; position: relative; margin: 0 auto;">
+    <br><br>
+    <form class="form-signing" method="post" action="#" th:action="@{/auth/login}">
+        <h2 class="form-signing-heading">Please sign in</h2>
+        <p>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </p>
+<!--        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
+        <br>
+        <form action="#" th:action="@{/}"  method="post" style="padding-bottom: 50px;">
+            <input class="login-btn" type="submit" value="Login" style="cursor: pointer; background-color: lightgreen; border-radius: 3px"/>
+        </form>
+    </form>
+</div>
+</body>
+</html>

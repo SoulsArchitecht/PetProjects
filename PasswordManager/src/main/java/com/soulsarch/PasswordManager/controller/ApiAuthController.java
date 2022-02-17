@@ -2,22 +2,19 @@ package com.soulsarch.PasswordManager.controller;
 
 
 import com.soulsarch.PasswordManager.api.responses.LoginResponse;
-import com.soulsarch.PasswordManager.api.requests.LoginRequest;
 import com.soulsarch.PasswordManager.api.responses.UserLoginResponse;
-import com.soulsarch.PasswordManager.entity.User;
 import com.soulsarch.PasswordManager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-@RestController
+@Controller
+//@RestController
 @RequestMapping("/auth/")
 public class ApiAuthController {
 
@@ -30,7 +27,23 @@ public class ApiAuthController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
+    public String getLoginPage() {
+        return "login";
+    }
+
+    @GetMapping("/success")
+    public String getSuccessPage() {
+        return "success";
+    }
+
+/*    @GetMapping("/logout")
+    public String getLogoutPage() {
+        return "logout";
+    }*/
+
+
+/*    @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         Authentication auth = authenticationManager
                 .authenticate(
@@ -40,7 +53,7 @@ public class ApiAuthController {
         User user = (User) auth.getPrincipal();
 
         return ResponseEntity.ok(getLoginResponse(user.getName()));
-    }
+    }*/
 
     @GetMapping("/check")
     public ResponseEntity<LoginResponse> check(Principal principal) {
