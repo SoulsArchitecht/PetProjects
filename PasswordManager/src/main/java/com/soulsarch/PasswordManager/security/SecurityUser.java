@@ -1,6 +1,8 @@
 package com.soulsarch.PasswordManager.security;
 
 import com.soulsarch.PasswordManager.entity.User;
+import com.soulsarch.PasswordManager.model.Status;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,10 +12,12 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class SecurityUser implements UserDetails {
     private final String username;
     private final String password;
     private final List<SimpleGrantedAuthority> authorities;
+    private final boolean activeTrue;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -32,29 +36,32 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return isActiveTrue();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return isActiveTrue();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return isActiveTrue();
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isActiveTrue();
     }
 
     public static UserDetails fromUser (User user) {
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
-                true, true, true, true,
+                user.getStatus().equals(Status.ACTIVE),
+                user.getStatus().equals(Status.ACTIVE),
+                user.getStatus().equals(Status.ACTIVE),
+                user.getStatus().equals(Status.ACTIVE),
                 user.getRole().getAuthorities());
 
     }
