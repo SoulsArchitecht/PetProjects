@@ -12,12 +12,19 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
+//AllArgsConstructor
 public class SecurityUser implements UserDetails {
     private final String username;
     private final String password;
     private final List<SimpleGrantedAuthority> authorities;
-    private final boolean activeTrue;
+    private final boolean isActive;
+
+    public SecurityUser(String username, String password, List<SimpleGrantedAuthority> authorities, boolean isActive) {
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+        this.isActive = isActive;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -36,22 +43,22 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return isActiveTrue();
+        return isActive;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return isActiveTrue();
+        return isActive;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return isActiveTrue();
+        return isActive;
     }
 
     @Override
     public boolean isEnabled() {
-        return isActiveTrue();
+        return isActive;
     }
 
     public static UserDetails fromUser (User user) {

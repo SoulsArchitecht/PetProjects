@@ -1,8 +1,9 @@
 package com.soulsarch.PasswordManager.model;
 
 public enum Permission {
-    USER("user:write"),
-    MODERATE("user:moderate");
+    URLINFORMATION_READ("urlInformation:read"),
+    URLINFORMATION_WRITE("urlInformation:write"),
+    URLINFORMATION_MODERATE("urlInformation:moderate");
 
     private final String permission;
 

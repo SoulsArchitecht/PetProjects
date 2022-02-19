@@ -27,7 +27,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
@@ -37,17 +37,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
+
+    /*    @Autowired
+    public SecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }*/
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf().disable() /*временное отключение защиты*/
             .authorizeRequests()
-            .antMatchers("/auth/login").permitAll()
-            //.antMatchers(HttpMethod.GET, "/**").hasAuthority(Permission.MODERATE.getPermission())
+            //.antMatchers("/auth/login").permitAll()
+            .antMatchers("/").permitAll()
             .anyRequest()
             .authenticated()
+            //.antMatchers(HttpMethod.GET, "/**").hasAuthority(Permission.URLINFORMATION_WRITE.getPermission())
+            //for h2 db access via localhost
+            //.and()
+            //.authorizeRequests().antMatchers("/h2-console/**").permitAll()
+            //.anyRequest()
+            //.authenticated()
+
+            //for h2 db access via localhost
+            //.and()
+            //.headers().frameOptions().disable()
+            //.and()
+            //.csrf().ignoringAntMatchers("/h2-console/**")
+            //.and()
+            //.cors().disable()
             .and()
-            .formLogin()//.loginPage("/login")
+            .formLogin()
             .loginPage("/auth/login").permitAll()
             .defaultSuccessUrl("/auth/success")
             .and()
@@ -78,7 +98,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }*/
 
 
-
+/*    //for inmemory security
     @Bean
     protected UserDetailsService userDetailsService() {
         //PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -94,13 +114,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .authorities(Role.MODERATOR.getAuthorities())
                         .build()
         );
-    }
+    }*/
 
     @Bean
     protected DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         return daoAuthenticationProvider;
     }
 

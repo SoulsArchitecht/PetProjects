@@ -24,6 +24,8 @@ public class URLInformation {
     private String password;
     @Column(name="description")
     private String description;
+    @Column(name="user_id")
+    private String userId;
 
     public URLInformation(String url, String email, String nickName, String password, String description) {
         this.url = url;

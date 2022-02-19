@@ -23,6 +23,7 @@ public class URLInfoController implements ApplicationContextAware {
     private ApplicationContext context;
 
     @RequestMapping("/")
+    @PreAuthorize("hasAuthority('urlInformaiton:read')")
     public String viewHomePage(Model model) {
         List<URLInformation> infoList = service.infoList();
         model.addAttribute("infoList", infoList);
@@ -30,6 +31,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping("/new")
+    @PreAuthorize("hasAuthority('urlInformaiton:read')")
     public String showCreatingNewURLInfoForm(Model model) {
         URLInformation urlInformation = new URLInformation();
         model.addAttribute("urlInformation", urlInformation);
@@ -38,6 +40,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('urlInformaiton:write')")
     public String saveURLInfo(@ModelAttribute("urlInformation") URLInformation urlInformation) {
         service.save(urlInformation);
 
@@ -45,6 +48,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping("/edit/{id}")
+    @PreAuthorize("hasAuthority('urlInformaiton:write')")
     public ModelAndView showEditURLInfoForm(@PathVariable(name = "id") int id) {
         ModelAndView modelAndView = new ModelAndView("edit_urlInformation");
 
@@ -55,6 +59,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('urlInformaiton:write')")
     public String deleteURLInfo(@PathVariable(name = "id") int id) {
         service.delete(id);
 
@@ -62,7 +67,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping("/search")
-    @PreAuthorize("hasAuthority('user:write')")
+    @PreAuthorize("hasAuthority('urlInformaiton:write')")
     public ModelAndView search (@RequestParam String keyword) {
         List<URLInformation> result = service.search(keyword);
         ModelAndView modelAndView = new ModelAndView("search");
@@ -72,7 +77,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @PostMapping("/shutdownContext")
-    @PreAuthorize("hasAuthority('user:moderate')")
+    @PreAuthorize("hasAuthority('urlInformation:moderate')")
     public String shutdownContext() {
         ((ConfigurableApplicationContext) context).close();
         return "redirect:about:blank";

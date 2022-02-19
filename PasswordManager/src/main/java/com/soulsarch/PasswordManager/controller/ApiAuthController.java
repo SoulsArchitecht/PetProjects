@@ -18,14 +18,14 @@ import java.security.Principal;
 @RequestMapping("/auth/")
 public class ApiAuthController {
 
-    private final AuthenticationManager authenticationManager;
+/*    private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
 
     @Autowired
     public ApiAuthController(AuthenticationManager authenticationManager, UserRepository userRepository) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
-    }
+    }*/
 
     @GetMapping("/login")
     public String getLoginPage() {
@@ -55,7 +55,7 @@ public class ApiAuthController {
         return ResponseEntity.ok(getLoginResponse(user.getName()));
     }*/
 
-    @GetMapping("/check")
+/*    @GetMapping("/check")
     public ResponseEntity<LoginResponse> check(Principal principal) {
         if (principal == null) {
             return ResponseEntity.ok(new LoginResponse());
@@ -71,7 +71,8 @@ public class ApiAuthController {
         UserLoginResponse userLoginResponse = new UserLoginResponse();
         userLoginResponse.setEmail(currentUser.getEmail());
         userLoginResponse.setName(currentUser.getName());
-        userLoginResponse.setModeration(currentUser.getModeratorTrue() == 1);
+        //userLoginResponse.setModeration(currentUser.getModeratorTrue() == 1);
+
         userLoginResponse.setId(currentUser.getId());
 
         LoginResponse loginResponse = new LoginResponse();
@@ -79,5 +80,5 @@ public class ApiAuthController {
         loginResponse.setUserLoginResponse(userLoginResponse);
 
         return loginResponse;
-    }
+    }*/
 }

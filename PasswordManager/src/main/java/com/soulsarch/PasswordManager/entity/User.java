@@ -9,20 +9,22 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private int id;
 
-    @Column(name = "moderatorTrue", columnDefinition = "TINYINT", nullable = false)
-    private int moderatorTrue;
+/*    @Column(name = "moderatorTrue", columnDefinition = "TINYINT", nullable = false)
+    private int moderatorTrue;*/
 
     @Column(name = "reg_time", columnDefinition = "DATETIME", nullable = false)
     private LocalDate regTime;
@@ -47,7 +49,11 @@ public class User {
     @Column(name = "status", nullable = false)
     private Status status;
 
-    public Role getRole() {
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<URLInformation> urlInformationList;
+
+/*    public Role getRole() {
         return moderatorTrue == 1 ? Role.MODERATOR : Role.USER;
-    }
+    }*/
 }

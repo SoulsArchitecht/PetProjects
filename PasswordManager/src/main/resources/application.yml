@@ -1,6 +1,6 @@
 spring:
   liquibase:
-    enabled: true
+    enabled: false
   datasource:
     url: jdbc:h2:file:./db;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
     username: u

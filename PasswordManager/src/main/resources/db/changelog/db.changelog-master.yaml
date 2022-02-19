@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/changeset/create-urlinformation-table.yaml
   - include:
       file: db/changelog/changeset/update-urlinformation-table.yaml
+  - include:
+      file: db/changelog/changeset/create-user-table.yaml
