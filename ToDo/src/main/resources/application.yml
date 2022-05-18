@@ -1,0 +1,30 @@
+server:
+  port: 8089
+
+spring:
+  liquibase:
+    enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/myblog?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;connectionCollation=utf8_general_ci&amp;characterSetResults=UTF-8
+    username: postgres
+    password: root1289User
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    hibernate:
+      ddl-auto: update
+
+
+logging:
+  file:
+    name: logs/app_dev.log
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+  level:
+    org:
+      springframework:
+        web: ERROR
+    com:
+      soulsarch:
+        PasswordManagerApplication: DEBUG
