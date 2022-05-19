@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
-public class ToDoItemController {
+public class TodoItemController {
 
     @GetMapping
     public String index() {

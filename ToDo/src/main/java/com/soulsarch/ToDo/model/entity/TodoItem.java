@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "todo_items")
 @NoArgsConstructor
 @AllArgsConstructor
 public class TodoItem {
