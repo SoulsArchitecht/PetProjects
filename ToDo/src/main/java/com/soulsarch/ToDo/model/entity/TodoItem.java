@@ -1,6 +1,7 @@
 package com.soulsarch.ToDo.model.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity(name = "todo_items")
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class TodoItem {
 
     @Id
@@ -19,4 +21,9 @@ public class TodoItem {
 
     @Column(name = "completed")
     private boolean completed;
+
+    public TodoItem(String title, boolean completed) {
+        this.title = title;
+        this.completed = completed;
+    }
 }

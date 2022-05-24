@@ -1,23 +1,65 @@
 package com.soulsarch.ToDo.service;
 
+import com.soulsarch.ToDo.model.dto.TodoItemDto;
 import com.soulsarch.ToDo.model.entity.TodoItem;
+import com.soulsarch.ToDo.model.enums.ListFilter;
 import com.soulsarch.ToDo.model.repository.TodoItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.AllNestedConditions;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.soulsarch.ToDo.model.enums.ListFilter.ACTIVE;
 
 @Service
+
 @Transactional
 public class TodoServiceImpl implements TodoItemService{
 
     @Autowired
     private TodoItemRepository todoItemRepository;
 
-    @Override
+    ListFilter listFilter;
+
+/*    @Override
     public List<TodoItem> getTodoItemsList() {
         return todoItemRepository.findAll();
+    }*/
+
+/*    public List<TodoItemDto> getTodoItemsList() {
+        return todoItemRepository.findAll()
+                .stream()
+                .map(todoItem -> new TodoItemDto(todoItem.getId(),
+                        todoItem.getTitle(),
+                        todoItem.isCompleted()))
+                .collect(Collectors.toList());
+    }*/
+    private List<TodoItemDto> convertToDto(List<TodoItem> todoItemList) {
+        return todoItemList
+                .stream()
+                .map(todoItem -> new TodoItemDto(todoItem.getId(),
+                        todoItem.getTitle(),
+                        todoItem.isCompleted()))
+                .collect(Collectors.toList());
+    }
+
+    private List<TodoItemDto> getTodoItem(ListFilter listFilter) {
+        return switch (listFilter) {
+            case (ALL):
+                convertToDto(todoItemRepository.findAll());
+            case (ACTIVE):
+                convertToDto(todoItemRepository.findAllByCompleted(false));
+            case (COMPLETED):
+                convertToDto(todoItemRepository.findAllByCompleted(true));
+            default:
+                convertToDto(todoItemRepository.findAll());
+
+        };
     }
 
     public void saveTodoItem(TodoItem todoItem) {
@@ -26,6 +68,11 @@ public class TodoServiceImpl implements TodoItemService{
 
     public TodoItem getTodoItem(long id) {
         return todoItemRepository.getById(id);
+    }
+
+    @Override
+    public List<TodoItem> getTodoItemsList() {
+        return null;
     }
 
     public void deleteTodoItem(long id) {
@@ -38,6 +85,11 @@ public class TodoServiceImpl implements TodoItemService{
 
     public List<TodoItem> search (String keyword) {
         return todoItemRepository.search(keyword);
+    }
+
+    public long countItem() {
+
+        return todoItemRepository.count();
     }
 
 }

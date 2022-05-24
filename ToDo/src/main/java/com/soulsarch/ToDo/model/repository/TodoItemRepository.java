@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface TodoItemRepository extends JpaRepository<TodoItem, Long> {
 
+    int countAllByCompleted(boolean completed);
+
+    List<TodoItem> findAllByCompleted(boolean completed);
+
     String query1 = "SELECT * FROM todo_items  WHERE "
             + "title LIKE %:keyword%";
 
