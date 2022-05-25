@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.soulsarch.ToDo.model.enums.ListFilter.ACTIVE;
+import static com.soulsarch.ToDo.model.enums.ListFilter.*;
 
 @Service
 
@@ -48,19 +48,33 @@ public class TodoServiceImpl implements TodoItemService{
                 .collect(Collectors.toList());
     }
 
-    private List<TodoItemDto> getTodoItem(ListFilter listFilter) {
+/*    private List<TodoItemDto> getTodoItem(ListFilter listFilter) {
         return switch (listFilter) {
-            case (ALL):
+            case ALL:
                 convertToDto(todoItemRepository.findAll());
-            case (ACTIVE):
+            case ACTIVE:
                 convertToDto(todoItemRepository.findAllByCompleted(false));
-            case (COMPLETED):
+            case COMPLETED:
                 convertToDto(todoItemRepository.findAllByCompleted(true));
             default:
                 convertToDto(todoItemRepository.findAll());
 
         };
+    }*/
+
+    private List<TodoItemDto> getTodoItem(ListFilter listFilter) {
+        if (listFilter.equals(ALL)) {
+            return convertToDto(todoItemRepository.findAll());
+        } else if (listFilter.equals(ACTIVE)) {
+            return convertToDto(todoItemRepository.findAllByCompleted(false));
+        } else if (listFilter.equals(COMPLETED)) {
+            return convertToDto(todoItemRepository.findAllByCompleted(true));
+        } else {
+            return convertToDto(todoItemRepository.findAll());
+        }
     }
+
+
 
     public void saveTodoItem(TodoItem todoItem) {
         todoItemRepository.save(todoItem);
