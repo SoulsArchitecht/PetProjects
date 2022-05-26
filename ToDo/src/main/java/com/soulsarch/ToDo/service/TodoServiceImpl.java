@@ -74,6 +74,14 @@ public class TodoServiceImpl implements TodoItemService{
         }
     }
 
+    public int getNumberOfActiveItems() {
+        return todoItemRepository.countAllByCompleted(false);
+    }
+
+    public int getNumberOfCompletedItems() {
+        return todoItemRepository.countAllByCompleted(true);
+    }
+
 
 
     public void saveTodoItem(TodoItem todoItem) {
