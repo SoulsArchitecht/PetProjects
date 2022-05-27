@@ -62,7 +62,7 @@ public class TodoServiceImpl implements TodoItemService{
         };
     }*/
 
-    private List<TodoItemDto> getTodoItem(ListFilter listFilter) {
+    public List<TodoItemDto> getTodoItem(ListFilter listFilter) {
         if (listFilter.equals(ALL)) {
             return convertToDto(todoItemRepository.findAll());
         } else if (listFilter.equals(ACTIVE)) {
