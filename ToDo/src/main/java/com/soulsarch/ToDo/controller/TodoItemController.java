@@ -6,10 +6,7 @@ import com.soulsarch.ToDo.model.enums.ListFilter;
 import com.soulsarch.ToDo.service.TodoServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -40,6 +37,20 @@ public class TodoItemController {
     public String indexCompleted(Model model) {
         addAttributesForIndex(model, ListFilter.COMPLETED);
         return "index";
+    }
+
+    @PostMapping
+    public String addNewTodoItem(@Valid @ModelAttribute("todoItem") TodoItemFormData formData) {
+        todoService.saveTodoItem(new TodoItem(formData.getTitle(), false));
+        return "redirect:/";
+    }
+
+    @PutMapping("/{id}/toggle")
+    public String toggleSelection(@PathVariable("id") Long id) {
+        TodoItem todoItem = todoService.getTodoItem(id); // throw exception needed
+        todoItem.setCompleted(!todoItem.isCompleted());
+        todoService.saveTodoItem(todoItem);
+        return "redirect:/";
     }
 
 
