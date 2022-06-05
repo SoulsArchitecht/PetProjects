@@ -53,6 +53,31 @@ public class TodoItemController {
         return "redirect:/";
     }
 
+    @PutMapping("/toggle-all")
+    public String toggleAll() {
+        List<TodoItem> todoItems = todoService.getTodoItemsList();
+        for (TodoItem todoItem : todoItems) {
+            todoItem.setCompleted(!todoItem.isCompleted());
+            todoService.saveTodoItem(todoItem);
+        }
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteTodoItem(@PathVariable("id") Long id) {
+        todoService.deleteTodoItem(id);
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/completed")
+    public String deleteCompletedItems() {
+        List<TodoItem> todoItems = todoService.findAllByCompleted(true);
+        for (TodoItem todoItem : todoItems) {
+            todoService.deleteTodoItem(todoItem.getId());
+        }
+        return "redirect:/";
+    }
+
 
     private void addAttributesForIndex (Model model, ListFilter listFilter) {
         model.addAttribute("item", new TodoItemFormData());

@@ -92,6 +92,10 @@ public class TodoServiceImpl implements TodoItemService{
         return todoItemRepository.getById(id);
     }
 
+    public List<TodoItem> findAllByCompleted(boolean completed) {
+        return todoItemRepository.findAllByCompleted(completed);
+    }
+
     @Override
     public List<TodoItem> getTodoItemsList() {
         return null;
