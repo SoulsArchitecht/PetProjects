@@ -1,5 +1,6 @@
 package com.soulsarch.PasswordManager.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.soulsarch.PasswordManager.model.Role;
 import com.soulsarch.PasswordManager.model.Status;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ import java.util.List;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private int id;
 
@@ -38,6 +39,7 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -48,12 +50,10 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
-
-    @OneToMany(cascade = CascadeType.ALL)
+/*    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private List<URLInformation> urlInformationList;
-
-/*    public Role getRole() {
+    private List<URLInformation> urlInformationList;*/
+    /*    public Role getRole() {
         return moderatorTrue == 1 ? Role.MODERATOR : Role.USER;
     }*/
 }

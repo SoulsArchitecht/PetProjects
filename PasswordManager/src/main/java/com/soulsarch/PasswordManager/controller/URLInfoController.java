@@ -16,14 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class URLInfoController implements ApplicationContextAware {
+public class URLInfoController {
     @Autowired
     private URLInfoService service;
 
-    private ApplicationContext context;
+/*    private ApplicationContext context;*/
 
     @RequestMapping("/")
-    @PreAuthorize("hasAuthority('urlInformaiton:read')")
+    @PreAuthorize("hasAnyAuthority('urlinformation:read', 'urlinformation:write', 'urlinformation:moderate')")
     public String viewHomePage(Model model) {
         List<URLInformation> infoList = service.infoList();
         model.addAttribute("infoList", infoList);
@@ -31,7 +31,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping("/new")
-    @PreAuthorize("hasAuthority('urlInformaiton:read')")
+    @PreAuthorize("hasAnyAuthority('urlinformation:read', 'urlinformation:write', 'urlinformation:moderate')")
     public String showCreatingNewURLInfoForm(Model model) {
         URLInformation urlInformation = new URLInformation();
         model.addAttribute("urlInformation", urlInformation);
@@ -40,7 +40,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    @PreAuthorize("hasAuthority('urlInformaiton:write')")
+    @PreAuthorize("hasAnyAuthority('urlinformation:read', 'urlinformation:write', 'urlinformation:moderate')")
     public String saveURLInfo(@ModelAttribute("urlInformation") URLInformation urlInformation) {
         service.save(urlInformation);
 
@@ -48,7 +48,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping("/edit/{id}")
-    @PreAuthorize("hasAuthority('urlInformaiton:write')")
+    @PreAuthorize("hasAnyAuthority('urlinformation:read', 'urlinformation:write', 'urlinformation:moderate')")
     public ModelAndView showEditURLInfoForm(@PathVariable(name = "id") int id) {
         ModelAndView modelAndView = new ModelAndView("edit_urlInformation");
 
@@ -59,7 +59,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping("/delete/{id}")
-    @PreAuthorize("hasAuthority('urlInformaiton:write')")
+    @PreAuthorize("hasAnyAuthority('urlinformation:read', 'urlinformation:write', 'urlinformation:moderate')")
     public String deleteURLInfo(@PathVariable(name = "id") int id) {
         service.delete(id);
 
@@ -67,7 +67,7 @@ public class URLInfoController implements ApplicationContextAware {
     }
 
     @RequestMapping("/search")
-    @PreAuthorize("hasAuthority('urlInformaiton:write')")
+    @PreAuthorize("hasAnyAuthority('urlinformation:read', 'urlinformation:write', 'urlinformation:moderate')")
     public ModelAndView search (@RequestParam String keyword) {
         List<URLInformation> result = service.search(keyword);
         ModelAndView modelAndView = new ModelAndView("search");
@@ -76,7 +76,7 @@ public class URLInfoController implements ApplicationContextAware {
         return modelAndView;
     }
 
-    @PostMapping("/shutdownContext")
+/*    @PostMapping("/shutdownContext")
     @PreAuthorize("hasAuthority('urlInformation:moderate')")
     public String shutdownContext() {
         ((ConfigurableApplicationContext) context).close();
@@ -86,5 +86,5 @@ public class URLInfoController implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext ctx) throws BeansException {
         this.context = ctx;
-    }
+    }*/
 }
