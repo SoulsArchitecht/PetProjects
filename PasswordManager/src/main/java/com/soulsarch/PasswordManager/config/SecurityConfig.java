@@ -27,7 +27,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
@@ -49,24 +49,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable() /*временное отключение защиты*/
             .authorizeRequests()
             //.antMatchers("/auth/login").permitAll()
-            .antMatchers("/").permitAll()
+            .antMatchers("/**").permitAll()
+           //for h2 db access via localhost
+            .and()
+            .authorizeRequests().antMatchers("/h2-console/**").permitAll()
             .anyRequest()
             .authenticated()
-            //.antMatchers(HttpMethod.GET, "/**").hasAuthority(Permission.URLINFORMATION_WRITE.getPermission())
-            //for h2 db access via localhost
-            //.and()
-            //.authorizeRequests().antMatchers("/h2-console/**").permitAll()
+            //.antMatchers("/**").hasAuthority(Permission.URLINFORMATION_READ.getPermission())
+
             //.anyRequest()
             //.authenticated()
 
             //for h2 db access via localhost
-            //.and()
-            //.headers().frameOptions().disable()
-            //.and()
-            //.csrf().ignoringAntMatchers("/h2-console/**")
-            //.and()
-            //.cors().disable()
             .and()
+            .headers().frameOptions().disable()
+            .and()
+            .csrf().ignoringAntMatchers("/h2-console/**")
+            .and()
+            .cors().disable()
+            //.and()
             .formLogin()
             .loginPage("/auth/login").permitAll()
             .defaultSuccessUrl("/auth/success")
@@ -125,7 +126,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
 
