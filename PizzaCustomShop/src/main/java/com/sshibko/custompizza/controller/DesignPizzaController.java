@@ -25,9 +25,9 @@ public class DesignPizzaController {
     public void addIngredientsToModel(Model model) {
 
         List<Ingredient> ingredients = Arrays.asList(
-            new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP),
-            new Ingredient("COTO", "Corn Tortilla", Ingredient.Type.WRAP),
-            new Ingredient("BLTO", "Buckwheat Tortilla", Ingredient.Type.WRAP),
+            new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.TORTILLA),
+            new Ingredient("COTO", "Corn Tortilla", Ingredient.Type.TORTILLA),
+            new Ingredient("BLTO", "Buckwheat Tortilla", Ingredient.Type.TORTILLA),
             new Ingredient("CHME", "Chicken Meat", Ingredient.Type.PROTEIN),
             new Ingredient("GRBF", "Ground Beef", Ingredient.Type.PROTEIN),
             new Ingredient("SALS", "Salami Sausage", Ingredient.Type.PROTEIN),
