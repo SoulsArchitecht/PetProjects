@@ -11,7 +11,7 @@ public class PizzaOrder {
     private String deliveryName;
     private String deliveryStreet;
     private String deliveryCity;
-    private String deliveryState;
+    private String deliveryRegion;
     private String deliveryZip;
     private String ccNumber;
     private String ccExpiration;
