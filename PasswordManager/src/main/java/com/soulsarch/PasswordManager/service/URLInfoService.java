@@ -12,8 +12,12 @@ import java.util.List;
 @Transactional
 public class URLInfoService {
 
+    private final URLInfoRepository repository;
+
     @Autowired
-    private URLInfoRepository repository;
+    public URLInfoService(URLInfoRepository repository) {
+        this.repository = repository;
+    }
 
     public List<URLInformation> infoList() {
         return repository.findAll();

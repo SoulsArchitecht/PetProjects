@@ -17,10 +17,15 @@ import java.util.List;
 
 @Controller
 public class URLInfoController {
-    @Autowired
+
     private URLInfoService service;
 
-/*    private ApplicationContext context;*/
+    @Autowired
+    public URLInfoController(URLInfoService service) {
+        this.service = service;
+    }
+
+    /*    private ApplicationContext context;*/
 
     @RequestMapping("/")
     @PreAuthorize("hasAnyAuthority('urlinformation:read', 'urlinformation:write', 'urlinformation:moderate')")
