@@ -6,8 +6,10 @@ import com.sshibko.custompizza.model.entity.PizzaOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,7 +65,10 @@ public class DesignPizzaController {
     }
 
     @PostMapping
-    public String processPizza(Pizza pizza, @ModelAttribute PizzaOrder pizzaOrder) {
+    public String processPizza(@Valid Pizza pizza, Errors errors, @ModelAttribute PizzaOrder pizzaOrder) {
+        if (errors.hasErrors()) {
+            return "design";
+        }
         pizzaOrder.addPizza(pizza);
         log.info("Processing pizza: {}", pizza);
 
