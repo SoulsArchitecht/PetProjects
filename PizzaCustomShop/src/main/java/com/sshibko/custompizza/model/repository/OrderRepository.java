@@ -1,13 +1,10 @@
 package com.sshibko.custompizza.model.repository;
 
 import com.sshibko.custompizza.model.entity.PizzaOrder;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
-public interface OrderRepository {
-
-    PizzaOrder save(PizzaOrder order);
-
-    Optional<PizzaOrder> findById(Long id);
+@Repository
+public interface OrderRepository extends CrudRepository<PizzaOrder, Long> {
 
 }

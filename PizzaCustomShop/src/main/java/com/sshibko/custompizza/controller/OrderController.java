@@ -20,7 +20,7 @@ import javax.validation.Valid;
 @SessionAttributes("pizzaOrder")
 public class OrderController {
 
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
     public OrderController(OrderRepository orderRepository) {
@@ -37,7 +37,7 @@ public class OrderController {
         if (errors.hasErrors()) {
             return "orderForm";
         }
-        //log.info("Order submitted: {}", order);
+        log.info("Order submitted: {}", order);
         orderRepository.save(order);
         sessionStatus.setComplete();
 

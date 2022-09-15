@@ -1,0 +1,126 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tables
+      author: Sergey Sh
+      changes:
+        - createTable if not exist:
+            tableName: custom_pizza.pizza_order
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: placed_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_street
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_city
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_region
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: delivery_zip
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cc_number
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cc_expiration
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cc_cvv
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+
+#        - createTable if not exist:
+#            tableName: custom_pizza.pizza
+#            columns:
+#              - column:
+#                  name: id
+#                  type: bigint
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
+#              - column:
+#                  name: pizza_order
+#                  type: bigint
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: pizza_order_key
+#                  type: bigint
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: created_at
+#                  type: timestamp
+#                  constraints:
+#                    nullable: false
+        - createTable if not exist:
+            tableName: custom_pizza.pizza
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+        - createTable if not exist:
+            tableName: custom_pizza.ingredient
+            columns:
+              - column:
+                  name: id
+                  type: varchar(16)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+

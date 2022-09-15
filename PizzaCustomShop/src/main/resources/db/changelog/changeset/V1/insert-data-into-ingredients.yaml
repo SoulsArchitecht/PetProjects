@@ -1,0 +1,185 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-into-ingredients
+      author: Sergey Sh
+      changes:
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'FLTO'
+              - column:
+                  name: name
+                  value: 'Flour Tortilla'
+              - column:
+                  name: type
+                  value: 0
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'COTO'
+              - column:
+                  name: name
+                  value: 'Corn Tortilla'
+              - column:
+                  name: type
+                  value: 0
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'BLTO'
+              - column:
+                  name: name
+                  value: 'Buckwheat Tortilla'
+              - column:
+                  name: type
+                  value: 0
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'CHME'
+              - column:
+                  name: name
+                  value: 'Chicken Meat'
+              - column:
+                  name: type
+                  value: 1
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'GRBF'
+              - column:
+                  name: name
+                  value: 'Ground Beef'
+              - column:
+                  name: type
+                  value: 1
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'SALS'
+              - column:
+                  name: name
+                  value: 'Salami Sausage'
+              - column:
+                  name: type
+                  value: 1
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'SLTO'
+              - column:
+                  name: name
+                  value: 'Sliced Tomatoes'
+              - column:
+                  name: type
+                  value: 2
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'DIPI'
+              - column:
+                  name: name
+                  value: 'Diced Pineapple'
+              - column:
+                  name: type
+                  value: 2
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'CHPE'
+              - column:
+                  name: name
+                  value: 'Chili Pepper'
+              - column:
+                  name: type
+                  value: 2
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'CHED'
+              - column:
+                  name: name
+                  value: 'Cheddar'
+              - column:
+                  name: type
+                  value: 3
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'MOZA'
+              - column:
+                  name: name
+                  value: 'Mozzarella'
+              - column:
+                  name: type
+                  value: 3
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'PARM'
+              - column:
+                  name: name
+                  value: 'Parmesan'
+              - column:
+                  name: type
+                  value: 3
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'SLSA'
+              - column:
+                  name: name
+                  value: 'Salsa'
+              - column:
+                  name: type
+                  value: 4
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'SRCR'
+              - column:
+                  name: name
+                  value: 'Sour Cream'
+              - column:
+                  name: type
+                  value: 4
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: id
+                  value: 'TOSA'
+              - column:
+                  name: name
+                  value: 'Tomato Sauce'
+              - column:
+                  name: type
+                  value: 4

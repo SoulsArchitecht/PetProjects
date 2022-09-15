@@ -3,22 +3,22 @@ server:
 
 spring:
   liquibase:
-    enabled: false
+    enabled: true
 
-    default-schema: custom_pizza
+#    default-schema: custom_pizza
 
   #  datasource:
 #    url: jdbc:postgresql://localhost:5432/custompizza?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;connectionCollation=utf8_general_ci&amp;characterSetResults=UTF-8
 #    username: postgres
 #    password: root1289User
 #    driver-class-name: org.postgresql.Driver
-#  jpa:
-#    #    database-platform: org.hibernate.dialect.H2Dialect
+  jpa:
+    #    database-platform: org.hibernate.dialect.H2Dialect
 #    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
-#    hibernate:
-#      ddl-auto: update
-    #      dialect: org.hibernate.dialect.PostgreSQL9Dialect
-    #      show_sql: true
+    hibernate:
+      ddl-auto: update
+#        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+#          show_sql: true
 #    properties:
 #      hibernate:
 #        show_sql: false

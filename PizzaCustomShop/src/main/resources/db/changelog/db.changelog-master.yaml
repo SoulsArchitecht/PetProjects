@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/V1/create-tables.yaml
+  - include:
+      file: db/changelog/changeset/V1/insert-data-into-ingredients.yaml
