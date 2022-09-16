@@ -3,7 +3,7 @@ server:
 
 spring:
   liquibase:
-    enabled: true
+    enabled: false
 
 #    default-schema: custom_pizza
 
