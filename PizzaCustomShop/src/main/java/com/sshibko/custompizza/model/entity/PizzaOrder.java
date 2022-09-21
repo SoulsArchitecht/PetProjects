@@ -27,6 +27,9 @@ public class PizzaOrder implements Serializable {
 
     private LocalDateTime placedAt = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
+    @ManyToOne
+    private User user;
+
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
     @NotBlank(message = "Street is required")
@@ -46,6 +49,11 @@ public class PizzaOrder implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Pizza> pizzas = new ArrayList<>();
+
+    @PrePersist
+    void placedAt() {
+        this.placedAt = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
 
     public void addPizza(Pizza pizza) {
         this.pizzas.add(pizza);

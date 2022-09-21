@@ -35,6 +35,11 @@ public class Pizza {
     @ManyToMany
     private List<Ingredient> ingredientList = new ArrayList<>();
 
+    @PrePersist
+    void createdAt() {
+        this.createdAt = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
     public void addIngredient(Ingredient ingredient) {
         this.ingredientList.add(ingredient);
     }
