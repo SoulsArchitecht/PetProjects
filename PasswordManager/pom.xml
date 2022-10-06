@@ -81,15 +81,15 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-<!--			<version>2.5.5</version>-->
+			<version>2.5.10</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.security/spring-security-core &ndash;&gt;
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-<!--			<version>5.6.0</version>-->
-		</dependency>
+&lt;!&ndash;			<version>5.6.0</version>&ndash;&gt;
+		</dependency>-->
 
 
 	</dependencies>

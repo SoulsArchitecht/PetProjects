@@ -24,8 +24,12 @@ public class URLInformation {
     private String password;
     @Column(name="description")
     private String description;
-    @Column(name="user_id")
-    private String userId;
+/*    @Column(name="user_id")
+    private String userId;*/
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     public URLInformation(String url, String email, String nickName, String password, String description) {
         this.url = url;

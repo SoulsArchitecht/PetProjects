@@ -1,41 +1,89 @@
 package com.soulsarch.PasswordManager.config;
 
-import com.soulsarch.PasswordManager.model.Permission;
-import com.soulsarch.PasswordManager.model.Role;
-import com.soulsarch.PasswordManager.security.UserDetailsServiceImpl;
+import com.soulsarch.PasswordManager.entity.User;
+import com.soulsarch.PasswordManager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsService userDetailsService;
+/*    private final UserDetailsService userDetailsService;
 
-    @Autowired
+*//*    @Autowired
     public SecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
+    }*/
+
+    @Bean
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
+        return username -> {
+            User user = userRepository.findByUsername(username);
+            if (user != null) {
+                return user;
+            }
+            throw new UsernameNotFoundException(
+                    "User '" + username + "' not found");
+
+        };
     }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/shutdownContext").access("hasRole('USER')")
+                .antMatchers("/", "/**").access("permitAll")
+                //.antMatchers("/", "/**").access("hasRole('User')")
+                //.antMatchers(("/login")).access("permitAll()")
+
+                .and()
+                .formLogin()
+                .loginPage("/login")
+
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+
+                .and()
+                .csrf()
+                .disable()
+                //.ignoringAntMatchers("/h2-console/**")
+
+                //.and()
+                .headers()
+                .frameOptions()
+                .sameOrigin()
+
+                //.and()
+                //.build();
+        ;
+    }
+
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+/*    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .userDetailsService(userDetailsService)
+            .passwordEncoder(encoder());
+    }*/
 
 
     /*    @Autowired
@@ -43,10 +91,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }*/
 
-    @Override
+/*    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable() /*временное отключение защиты*/
+            .csrf().disable() *//*временное отключение защиты*//*
             .authorizeRequests()
             //.antMatchers("/auth/login").permitAll()
             .antMatchers("/**").permitAll()
@@ -80,7 +128,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutSuccessUrl("/auth/login");
             //.httpBasic();
 
-    }
+    }*/
 
 
     /*    @Override
@@ -117,18 +165,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         );
     }*/
 
-    @Bean
+/*    @Bean
     protected DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         return daoAuthenticationProvider;
-    }
+    }*/
 
-    @Bean
+/*    @Bean
     protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
-    }
+    }*/
 
 /*    @Override
     @Bean
@@ -136,8 +184,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }*/
 
-    @Override
+/*    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
-    }
+    }*/
 }

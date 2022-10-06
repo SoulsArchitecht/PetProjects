@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>URLManagerHome</title>
+</head>
+<body>
+
+
+    <div align="center" style="background-color: antiquewhite; min-width: 1366px; min-height: 768px; display: block;
+     align-content: center; position: relative; margin: 0 auto;">
+        <br> <br>
+        <img th:src="@{/images/main_bg.jpg}" alt="main_bg_picture" style="float-wrap: wrap; display: block; margin: 0 auto;"/>
+        <h1>Welcome to the URL Manager</h1>
+
+        <br>
+        <h3>
+            <a th:href="@{/login}">Sign up</a> </h3>
+
+        <br>
+        <form th:action="@{/login}" method="get">
+
+                <input type="button" value="Sign Up!" class="btn btn-red" />
+
+        </form>
+
+
+        <h3 style="padding-bottom: 60px;">New here? Click
+            <a th:href="@{/register}">here</a> to register.</h3>
+
+
+    </div>
+
+    <div>
+
+    </div>
+</body>
+</html>

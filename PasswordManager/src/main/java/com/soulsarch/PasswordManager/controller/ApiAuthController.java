@@ -15,7 +15,7 @@ import java.security.Principal;
 
 @Controller
 //@RestController
-@RequestMapping("/auth/")
+//@RequestMapping("/auth/")
 public class ApiAuthController {
 
 /*    private final AuthenticationManager authenticationManager;

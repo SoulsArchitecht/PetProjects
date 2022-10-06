@@ -9,9 +9,9 @@
 <!--</head>-->
 <body>
 <div class="container"  align="center" style="background-color: antiquewhite; min-width: 1366px; min-height: 768px;
-     align-content: center; position: relative; margin: 0 auto;">
-    <br><br>
-    <form class="form-signing" method="post" action="#" th:action="@{/auth/login}">
+     align-content: center; position: relative; margin: 0 auto; display: block;">
+    <br>
+<!--    <form class="form-signing" method="post" action="#" th:action="@{/auth/login}">
         <h2 class="form-signing-heading">Please sign in</h2>
         <p>
             <label for="username">Username</label>
@@ -21,12 +21,30 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
-<!--        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
+&lt;!&ndash;        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>&ndash;&gt;
         <br>
         <form action="#" th:action="@{/}"  method="post" style="padding-bottom: 50px;">
             <input class="login-btn" type="submit" value="Login" style="cursor: pointer; background-color: lightgreen; border-radius: 3px"/>
         </form>
+    </form>-->
+    <h1>Welcome to the URL Manager</h1>
+    <img th:src="@{/images/main_bg.jpg}"/>
+    <br><br>
+
+    <form method="POST" th:action="@{/login}" id="loginForm" style="padding-bottom: 30px">
+
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username" /><br/>
+        <br><br>
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password" /><br/>
+
+        <br><br>
+        <input type="submit" value="Login" style="cursor: pointer; background-color: lightgreen; border-radius: 5px; padding: 10px; font-size: large"/>
     </form>
+
+    <h3 style="padding-bottom: 60px"> New here? Click
+        <a th:href="@{/register}">here</a> to register.</h3>
 </div>
 </body>
 </html>
