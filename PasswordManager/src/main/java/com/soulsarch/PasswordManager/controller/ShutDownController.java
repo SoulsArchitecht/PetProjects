@@ -17,7 +17,6 @@ public class ShutDownController implements ApplicationContextAware {
         return "redirect:about:blank";
     }
 
-
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.context = applicationContext;

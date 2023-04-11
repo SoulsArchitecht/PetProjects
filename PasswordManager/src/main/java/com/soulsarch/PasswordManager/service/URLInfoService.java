@@ -24,7 +24,7 @@ public class URLInfoService {
     }
 
     public void save(URLInformation urlInformation) {
-        repository.save(urlInformation);
+        repository.saveAndFlush(urlInformation);
     }
 
     public URLInformation get(int id) {
