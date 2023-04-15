@@ -12,9 +12,9 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private URLInfoRepository urlInfoRepository;
+    private final URLInfoRepository urlInfoRepository;
 
     @Autowired
     public UserService(UserRepository userRepository, URLInfoRepository urlInfoRepository) {

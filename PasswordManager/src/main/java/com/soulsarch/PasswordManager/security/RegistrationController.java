@@ -28,7 +28,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processRegistration(RegistrationFrom form) {
+    public String processRegistration(RegistrationForm form) {
         userRepository.save(form.toUser(passwordEncoder));
         return "redirect:/login";
     }

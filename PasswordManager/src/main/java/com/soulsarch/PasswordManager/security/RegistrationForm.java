@@ -5,7 +5,7 @@ import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Data
-public class RegistrationFrom {
+public class RegistrationForm {
 
     private String username;
 
