@@ -24,6 +24,12 @@ public class UserService {
 
     public List<URLInformation> getListByUser(User user) {
        //return userRepository.getUrlInformationList();
-       return user.getUrlInformationList();
+       //return user.getUrlInformationList();
+        String userId = String.valueOf(user.getId());
+        return urlInfoRepository.findAllByUser(userId);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
